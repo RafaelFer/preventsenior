@@ -77,7 +77,7 @@ SpringCache
 
 <li>Observações</li>
 A api é capaz de receber um arquivo de Logs e ignorar linhas que estão com algum tipo de erro
-Api utilizando cache no método getAll para evitar muitas requisições no banco
+Api utilizando cache no método getAll para evitar muitas requisições no banco (Coloquei cache só para fins técnicos, mas é importante saber do negócio a periodicidade que estpa tabela seria alterada).
 
 
 
