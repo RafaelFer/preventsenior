@@ -6,6 +6,8 @@ import br.com.preventesenior.desafio.logManager.model.Log;
 import br.com.preventesenior.desafio.logManager.service.LogService;
 import br.com.preventesenior.desafio.logManager.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +24,7 @@ public class LogController {
     LogService logService;
 
     @GetMapping("/")
+    @Cacheable(value = "allLogs")
     public ResponseEntity findAll(){
         List<Log> all = logService.findAll();
         if(all != null){
@@ -43,6 +46,7 @@ public class LogController {
     }
 
     @DeleteMapping("/{id}")
+    @CacheEvict(value = "allLogs", allEntries = true)
     public ResponseEntity deleteById(@PathVariable Long id){
         if(logService.deleteById(id)){
             return ResponseEntity.ok().build();
@@ -52,6 +56,7 @@ public class LogController {
     }
 
     @PutMapping("/{id}")
+    @CacheEvict(value = "allLogs", allEntries = true)
     public ResponseEntity update(@RequestBody @Valid LogForm logForm, @PathVariable Long id){
         if(logService.update(id, logForm.convertToLog())){
             return ResponseEntity.ok().build();
@@ -60,12 +65,14 @@ public class LogController {
     }
 
     @PostMapping
+    @CacheEvict(value = "allLogs", allEntries = true)
     public ResponseEntity create(@RequestBody @Valid LogForm logForm){
         Log log = logService.create(logForm.convertToLog());
         return ResponseEntity.status(201).body(new LogDTO(log));
     }
 
     @PostMapping("/upload")
+    @CacheEvict(value = "allLogs", allEntries = true)
     public ResponseEntity upload(@RequestParam("file") MultipartFile file ){
         List<Log> logs = readFileLineByLine(file, new LogForm());
         logs.forEach( l -> logService.create(l));
