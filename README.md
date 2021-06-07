@@ -30,6 +30,51 @@ mvn test
 
 <li>Como usar</li>
 
+Receber todos os registros:
+Método: Get
+http://localhost:8080/log/
+
+Receber um unico log via path param:
+Método: Get
+http://localhost:8080/log/2
+
+Excluir um log:
+Método: Delete
+http://localhost:8080/log/2
+
+Alterar um log:
+Método Put
+http://localhost:8080/log/3
+```ruby
+	{
+    "date": "2021-06-06T23:23:01.12327",
+    "ip": "192.168.0.1.",
+    "request": "NOT OK",
+    "userAgent": "USER_AGENTE_ALTERANDO",
+    "status": "OK!"
+	}
+```
+Criando um log novo:
+Método Post
+```ruby
+	{
+		"date":"2021-06-06T23:23:01.12327",
+		"ip":"192.168.0.1.",
+		"request":"HTTP",
+		"userAgent":"Rafinha",
+		"status":"OK!"
+	}
+```
+
+Enviando um arquivo de logs em massa:
+Método post
+http://localhost:8080/log/upload
+
+
+
+
+
+
 
 
 
