@@ -1,9 +1,6 @@
 # preventsenior
  technical challenge for prevent senior
 
-
-# FormDog application
-
 ## Descrição do projeto
 Api capaz de realizar leitura, edição, adição e adição via arquivo de logs
 
@@ -47,11 +44,11 @@ Método Put
 http://localhost:8080/log/3
 ```ruby
 	{
-    "date": "2021-06-06T23:23:01.12327",
-    "ip": "192.168.0.1.",
-    "request": "NOT OK",
-    "userAgent": "USER_AGENTE_ALTERANDO",
-    "status": "OK!"
+		"date": "2021-06-06T23:23:01.12327",
+		"ip": "192.168.0.1.",
+		"request": "NOT OK",
+		"userAgent": "USER_AGENTE_ALTERANDO",
+		"status": "OK!"
 	}
 ```
 Criando um log novo:
@@ -70,6 +67,17 @@ Enviando um arquivo de logs em massa:
 Método post
 http://localhost:8080/log/upload
 
+
+
+<li>O que estou usando</li>
+Java 11
+JDBCTemplate
+SpringBoot
+SpringCache
+
+<li>Observações</li>
+A api é capaz de receber um arquivo de Logs e ignorar linhas que estão com algum tipo de erro
+Api utilizando cache no método getAll para evitar muitas requisições no banco
 
 
 
